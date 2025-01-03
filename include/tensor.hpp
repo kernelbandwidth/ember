@@ -1,8 +1,6 @@
 #pragma once
 #include <vector>
 #include <span>
-#include <cassert>
-#include <initializer_list>
 
 #include "util.hpp"
 
@@ -27,7 +25,7 @@ struct Tensor {
     
     // Indexing operations
     size_t index(std::span<const size_t>& indices) const {
-        assert(indices.size() == shape.size());
+        ASSERT_EQ_DEBUG(indices.size(), shape.size());
         size_t flat_index = 0;
         size_t stride = 1;
         for (int i = shape.size() - 1; i >= 0; --i) {
@@ -54,16 +52,16 @@ struct Tensor {
         }
     }
 
-    void scalar_mul(float scalar, Tensor& output) const {
+    void sm(float scalar, Tensor& output) const {
         size_t sz = size();
-        assert(output.size() == sz);
+        ASSERT_EQ_DEBUG(output.size(), sz);
         for (size_t i = 0; i < sz; ++i) {
             output.data[i] = data[i] * scalar;
         }
     }
 
-    void scalar_mul_mut(float scalar) { 
-        scalar_mul(scalar, *this); 
+    void sm_mut(float scalar) { 
+        sm(scalar, *this); 
     }
 
     void matmul(const Tensor& other, Tensor& output) const {
@@ -86,7 +84,7 @@ struct Tensor {
     Tensor operator*(float scalar) const {
         std::vector<size_t> shape_clone = shape;
         Tensor output(shape_clone);
-        scalar_mul(scalar, output);
+        sm(scalar, output);
         return output;
     }
 

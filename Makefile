@@ -6,6 +6,10 @@ ifdef DISABLE_SIZE_CHECKS
 CXXFLAGS += -DDISABLE_SIZE_CHECKS
 endif
 
+ifdef NDEBUG
+CXXFLAGS += -DNDEBUG
+endif
+
 # Dirs
 SRCDIR = src
 TESTDIR = test
