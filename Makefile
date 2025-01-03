@@ -35,7 +35,7 @@ $(TARGET): $(OBJECTS) $(BUILDDIR)/main.o
 
 # Compile main.o separately
 $(BUILDDIR)/main.o: $(MAIN_SOURCE)
-	@mkdir -p $(BINDIR)
+	@mkdir -p $(BUILDDIR)
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 # Rule for compiling source objects
