@@ -20,7 +20,7 @@ struct Tensor {
         }
 
     size_t size() const {
-        return compute_size(shape);
+        return data.size();
     }
     
     // Indexing operations
@@ -65,12 +65,13 @@ struct Tensor {
     }
 
     void matmul(const Tensor& other, Tensor& output) const {
-        unimplemented();
+        UNIMPLEMENTED();
     }
 
     // Core operations that are mutating
     void softmax(size_t axis) {
-        unimplemented();
+        ASSERT_LE_DEBUG(axis, shape.size());
+        UNIMPLEMENTED();
     }
 
     // Core algebra operations (allocates return value)
@@ -89,16 +90,23 @@ struct Tensor {
     }
 
     Tensor matmul(const Tensor& other) const {
-        unimplemented();
+        std::vector<size_t> shape_clone = shape;
+        Tensor output(shape_clone);
+        matmul(other, output);
+        return output;
     }
 
     float sum() const {
-        unimplemented();
+        float total = 0;
+        for (size_t i = 0; i < size(); ++i) {
+            total += data[i];
+        }
+        return total;
     }
     
     // Utility, primarily for debugging
     void print() const {
-        unimplemented();
+        UNIMPLEMENTED();
     }
 
 private:
