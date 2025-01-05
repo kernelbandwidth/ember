@@ -34,6 +34,22 @@
 #define ASSERT_GT_DEBUG(lhs, rhs) __ASSERT_OP_DEBUG(lhs, >, rhs, ">")
 #define ASSERT_GE_DEBUG(lhs, rhs) __ASSERT_OP_DEBUG(lhs, >=, rhs, ">=")
 
+#define ASSERT_TRUE_DEBUG(condition) \
+    do { \
+        if (!(condition)) { \
+            LOG("Assertion failed: " #condition " expected to be true, was false"); \
+            std::exit(EXIT_FAILURE); \
+        } \
+    } while (false)
+
+#define ASSERT_FALSE_DEBUG(condition) \
+    do { \
+        if (condition) { \
+            LOG("Assertion failed: " #condition " expected to be false, was true"); \
+            std::exit(EXIT_FAILURE); \
+        } \
+    } while (false)
+
 #else
 
 #define ASSERT_EQ_DEBUG(lhs, rhs) __ASSERT_NOOP
@@ -41,6 +57,6 @@
 #define ASSERT_LE_DEBUG(lhs, rhs) __ASSERT_NOOP
 #define ASSERT_GT_DEBUG(lhs, rhs) __ASSERT_NOOP
 #define ASSERT_GE_DEBUG(lhs, rhs) __ASSERT_NOOP
-#define ASSERT_DEBUG(condition) __ASSERT_NOOP
-
+#define ASSERT_TRUE_DEBUG(condition) __ASSERT_NOOP
+#define ASSERT_FALSE_DEBUG(condition) __ASSERT_NOOP
 #endif
