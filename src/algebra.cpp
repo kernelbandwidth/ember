@@ -3,6 +3,17 @@
 
 namespace ember::alg {
 
+// File private helper functions
+inline std::vector<size_t> compute_shape(const Tensor& lhs, const Tensor& rhs) {
+    UNIMPLEMENTED();
+}
+
+inline std::vector<size_t> compute_shape(const std::vector<size_t>& lhs, const std::vector<size_t>& rhs) {
+    UNIMPLEMENTED();
+}
+
+// Implementations
+
 inline void sm(const Tensor& t, float k, Tensor& output) {
     ASSERT_EQ_DEBUG(t.size(), output.size());
     for (size_t i = 0; i < t.size(); ++i) {
@@ -63,12 +74,4 @@ inline float sum(const Tensor& t) {
     return total;
 }
 
-// File private helper functions
-inline std::vector<size_t> compute_shape(const Tensor& lhs, const Tensor& rhs) {
-    UNIMPLEMENTED();
-}
-
-inline std::vector<size_t> compute_shape(const std::vector<size_t>& lhs, const std::vector<size_t>& rhs) {
-    UNIMPLEMENTED();
-}
 }
