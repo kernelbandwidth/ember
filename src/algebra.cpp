@@ -59,7 +59,14 @@ inline Tensor matmul(const Tensor& lhs, const Tensor& rhs) {
 }
 
 inline float inner(const Tensor& lhs, const Tensor& rhs) {
-    UNIMPLEMENTED();
+    ASSERT_EQ_DEBUG(lhs.shape, rhs.shape);
+    ASSERT_EQ_DEBUG(lhs.size(), rhs.size());
+    
+    float total = 0;
+    for (size_t i = 0; i < lhs.size(); ++i) {
+        total += lhs.data[i] * rhs.data[i];
+    }
+    return total;
 }
 
 inline void softmax(Tensor& t, size_t axis) {
