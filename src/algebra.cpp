@@ -5,11 +5,11 @@ namespace ember::alg {
 
 // File private helper functions
 inline std::vector<size_t> compute_shape(const Tensor& lhs, const Tensor& rhs) {
-    UNIMPLEMENTED();
+    TODO();
 }
 
 inline std::vector<size_t> compute_shape(const std::vector<size_t>& lhs, const std::vector<size_t>& rhs) {
-    UNIMPLEMENTED();
+    TODO();
 }
 
 // Implementations
@@ -49,7 +49,7 @@ inline Tensor add(const Tensor& lhs, const Tensor& rhs) {
 }
 
 inline void matmul(const Tensor& lhs, const Tensor& rhs, Tensor& output) {
-    UNIMPLEMENTED();
+    TODO();
 }
 
 inline Tensor matmul(const Tensor& lhs, const Tensor& rhs) {
@@ -70,7 +70,9 @@ inline float inner(const Tensor& lhs, const Tensor& rhs) {
 }
 
 inline void softmax(Tensor& t, size_t axis) {
-    UNIMPLEMENTED();
+    ASSERT_LT_DEBUG(axis, t.shape.size());
+
+    TODO();
 }
 
 inline float sum(const Tensor& t) {

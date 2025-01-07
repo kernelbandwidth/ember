@@ -29,6 +29,7 @@ std::ostream& operator<<(std::ostream& os, const std::vector<T>& vec) {
         std::exit(EXIT_FAILURE); \
     } while (false)
 
+#define TODO() UNIMPLEMENTED()
 
 #define __ASSERT_OP_DEBUG(lhs, op, rhs, op_str) \
     do { \
