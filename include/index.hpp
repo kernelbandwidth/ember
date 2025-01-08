@@ -6,6 +6,7 @@
 
 #include "util.hpp"
 
+namespace ember::index {
 class MaskedIndexIterator {
     std::vector<size_t> shape_;
     std::vector<size_t> index_;
@@ -33,7 +34,11 @@ public:
         done_ = true;
     }
 
-    std::span<const size_t> current() { return index_; }
+    std::span<const size_t> current(size_t masked_index) {
+        index_[fixed_index_] = masked_index; 
+        return index_; 
+    }
 
     bool done() { return done_; }
 };
+} // namespace ember::index

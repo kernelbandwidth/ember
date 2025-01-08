@@ -24,7 +24,7 @@ struct Tensor {
     }
     
     // Indexing operations
-    size_t index(std::span<const size_t>& indices) const {
+    size_t index(std::span<const size_t> indices) const {
         ASSERT_EQ_DEBUG(indices.size(), shape.size());
         size_t flat_index = 0;
         size_t stride = 1;
@@ -36,11 +36,11 @@ struct Tensor {
         return flat_index;
     }
 
-    float& operator()(std::span<const size_t>& indices) {
+    float& operator()(std::span<const size_t> indices) {
         return data[index(indices)];
     }
 
-    float operator()(std::span<const size_t>& indices) const {
+    float operator()(std::span<const size_t> indices) const {
         return data[index(indices)];
     }
     

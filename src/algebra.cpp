@@ -1,4 +1,8 @@
+#include <algorithm>
+#include <cmath>
+
 #include "algebra.hpp"
+#include "index.hpp"
 #include "util.hpp"
 
 namespace ember::alg {
@@ -71,8 +75,23 @@ inline float inner(const Tensor& lhs, const Tensor& rhs) {
 
 inline void softmax(Tensor& t, size_t axis) {
     ASSERT_LT_DEBUG(axis, t.shape.size());
+    index::MaskedIndexIterator iter(t.shape, axis);
 
-    TODO();
+    while (!iter.done()) {
+        float max_val = -std::numeric_limits<float>::infinity();
+        for (size_t i = 0; i < t.shape[axis]; ++i) {
+            max_val = std::max(max_val, t(iter.current(i)));
+        }
+        float sum_val = 0.0f;
+        for (size_t i = 0; i < t.shape[axis]; ++i) {
+            size_t raw_index = t.index(iter.current(i));
+            t.data[raw_index] = std::exp(t.data[raw_index] - max_val);
+            sum_val += t.data[raw_index];
+        }
+        for (size_t i = 0; i < t.shape[axis]; ++i) {
+            t(iter.current(i)) /= sum_val;
+        }
+    }
 }
 
 inline float sum(const Tensor& t) {
