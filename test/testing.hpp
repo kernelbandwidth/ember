@@ -9,6 +9,9 @@
 #define COLOR_RED "\033[31m"
 #define COLOR_RESET "\033[0m"
 
+#define STRINGIFY(x) #x
+#define TOSTRING(x) STRINGIFY(x)
+
 struct Test {
     std::string name;
     std::function<void()> test_fn;
@@ -66,6 +69,6 @@ inline int run_tests() {
 #define EXPECT_AP_EQ(lhs, rhs) \
     do { \
         if ((std::abs((lhs) - (rhs))) > EPSILON) { \
-            throw std::runtime_error("Expected eqality to within ##EPSILON"); \
+            throw std::runtime_error(std::string("Expected eqality to within ") + TOSTRING(EPSILON)); \
         } \
     } while (false)
