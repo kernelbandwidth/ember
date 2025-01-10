@@ -1,4 +1,5 @@
 #pragma once
+
 #include <cmath>
 #include <iostream>
 #include <functional>
@@ -69,6 +70,6 @@ inline int run_tests() {
 #define EXPECT_AP_EQ(lhs, rhs) \
     do { \
         if ((std::abs((lhs) - (rhs))) > EPSILON) { \
-            throw std::runtime_error(std::string("Expected eqality to within ") + TOSTRING(EPSILON)); \
+            throw std::runtime_error(std::string("Expected equality to within ") + TOSTRING(EPSILON)); \
         } \
     } while (false)
