@@ -91,6 +91,7 @@ void softmax(Tensor& t, size_t axis) {
         for (size_t i = 0; i < t.shape[axis]; ++i) {
             t(iter.current(i)) /= sum_val;
         }
+        iter.next();
     }
 }
 
