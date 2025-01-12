@@ -23,13 +23,11 @@ std::ostream& operator<<(std::ostream& os, const std::vector<T>& vec) {
         std::endl; \
     } while (false)
 
-#define UNIMPLEMENTED() \
+#define TODO() \
     do { \
-        LOG("unimplemented."); \
+        LOG("todo"); \
         std::exit(EXIT_FAILURE); \
     } while (false)
-
-#define TODO() UNIMPLEMENTED()
 
 #define __ASSERT_OP_DEBUG(lhs, op, rhs, op_str) \
     do { \

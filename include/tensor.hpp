@@ -47,7 +47,7 @@ struct Tensor {
     
     // Utility, primarily for debugging
     void print() const {
-        UNIMPLEMENTED();
+        TODO();
     }
 
 private:
