@@ -63,6 +63,7 @@ Tensor matmul(const Tensor& lhs, const Tensor& rhs) {
 }
 
 float inner(const Tensor& lhs, const Tensor& rhs) {
+    ASSERT_EQ_DEBUG(lhs.shape.size(), 1);
     ASSERT_EQ_DEBUG(lhs.shape, rhs.shape);
     ASSERT_EQ_DEBUG(lhs.size(), rhs.size());
     

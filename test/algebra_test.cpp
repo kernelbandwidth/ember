@@ -9,7 +9,7 @@
 
 TEST_MAIN()
 
-namespace ember {
+namespace ember::alg {
 
 void assign_all(Tensor& t, float value) {
     for (size_t i = 0; i < t.data.size(); ++i) {
@@ -28,7 +28,7 @@ TEST_CASE(assign_all_works) {
 TEST_CASE(scalar_multiplication_works) {
     Tensor t(std::vector({2ul, 2ul}));
     assign_all(t, 1.0f);
-    auto got = alg::sm(t, 3.0f);
+    auto got = sm(t, 3.0f);
     for (size_t i = 0; i < t.data.size(); ++i) {
         EXPECT_AP_EQ(got.data[i], 3.0f);
     }
@@ -37,16 +37,25 @@ TEST_CASE(scalar_multiplication_works) {
 TEST_CASE(scalar_multiplication_mut_works) {
     Tensor t(std::vector({2ul, 2ul}));
     assign_all(t, 1.0f);
-    alg::sm_mut(t, 3.0f);
+    sm_mut(t, 3.0f);
     for (size_t i = 0; i < t.data.size(); ++i) {
         EXPECT_AP_EQ(t.data[i], 3.0f);
     }
 }
 
+TEST_CASE(inner_works) {
+    Tensor lhs(std::vector{4ul});
+    Tensor rhs(std::vector{4ul});
+    assign_all(lhs, 2.0f);
+    assign_all(rhs, 2.0f);
+    float got = inner(lhs, rhs);
+    EXPECT_AP_EQ(got, 16.0f);
+}
+
 TEST_CASE(softmax_vector_works) {
     Tensor t(std::vector({5ul}));
     assign_all(t, 1.0f);
-    alg::softmax(t, 0);
+    softmax(t, 0);
     float sum = 0.0f;
     for (size_t i = 0; i < t.size(); ++i) {
         sum += t.data[i];
@@ -58,7 +67,7 @@ TEST_CASE(softmax_vector_works) {
 TEST_CASE(softmax_matrix_works) {
     Tensor t(std::vector({2ul, 2ul}));
     assign_all(t, 1.0f);
-    alg::softmax(t, 0);
+    softmax(t, 0);
     index::MaskedIndexIterator iter(t.shape, 0);
     while (!iter.done()) {
         float sum = 0.0f;
